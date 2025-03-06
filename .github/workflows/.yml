@@ -1,0 +1,16 @@
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Upload to LambdaTest
+      run: |
+        curl --location 'https://api.lambdatest.com/automation/smart-ui/v2/upload' \
+        --header "Authorization: Basic ${{ secrets.LT_USERNAME }}:${{ secrets.LT_ACCESS_TOKEN }}" \
+        --form 'projectToken="2378504#03445777-295a-4e66-a8a1-4d3d817b93cd#BoomAi SmartUi Visual Testing"' \
+        --form 'buildName="smartui-build"' \
+        --form 'screenshotNames="screenshot1.png"' \
+        --form 'files=@"screenshot1.png"'
